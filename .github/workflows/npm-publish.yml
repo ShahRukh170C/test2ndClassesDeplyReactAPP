@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Deploy Website
+name: Deploy Websitess
 
 on: [push]
 
@@ -18,7 +18,6 @@ jobs:
       - uses : borales/action-yarn@v2.0.0
         with:
           cmd: install
-         
       - name: Build React App
         run: yarn build
       - name: Install Surge
