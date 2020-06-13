@@ -1,9 +1,11 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+name: CI
 
-name: Deploy Websitess
-
-on: [push]
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+ 
 
 jobs:
   build:
@@ -15,12 +17,14 @@ jobs:
         uses: actions/setup-node@v2-beta
         with:
           node-version: 12
-      - uses : borales/action-yarn@v2.0.0
+      - uses: borales/actions-yarn@v2.0.0
         with:
-          cmd: install
+          cmd: install # will run `yarn install` command
+      - name: install yarn
+        run:  yarn build
       - name: Build React App
         run: yarn build
       - name: Install Surge
         run: npm install -g surge
       - name: Run surge
-        run: surge ./build class02Deploy.surge.sh --token ${{ secrets.TSTDEPS }}
+        run: surge ./build bootcamp_react_app_sample.surge.sh --token ${{ secrets.TSTDEPS }}
